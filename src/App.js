@@ -28,7 +28,7 @@ class BooksApp extends Component {
 			const wantToRead = this.filterShelves(books, 'wantToRead');
 			const currentlyReading = this.filterShelves(books, 'currentlyReading');
 			const read = this.filterShelves(books, 'read');
-			this.setState({ wantToRead, currentlyReading, read });
+			this.setState({ wantToRead, currentlyReading, read, books });
 		} catch (e) {
 			throw new Error(e);
 		}
@@ -50,7 +50,7 @@ class BooksApp extends Component {
 					<Route
 						path='/'
 						exact
-						component={() => (
+						render={() => (
 							<Home
 								currentlyReading={this.state.currentlyReading}
 								read={this.state.read}
@@ -63,7 +63,7 @@ class BooksApp extends Component {
 					></Route>
 					<Route
 						path='/search'
-						component={() => (
+						render={() => (
 							<Search
 								allBooks={this.state.books}
 								updateBookShelf={(book, shelf) =>

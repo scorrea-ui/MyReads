@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ShelfSelector = ({ book, shelf, updateBookShelf }) => {
 	const updateShelf = (e) => {
@@ -17,6 +18,12 @@ const ShelfSelector = ({ book, shelf, updateBookShelf }) => {
 			</select>
 		</div>
 	);
+};
+
+ShelfSelector.propTypes = {
+	book: PropTypes.object.isRequired,
+	shelf: PropTypes.string.isRequired,
+	updateBookShelf: PropTypes.func.isRequired,
 };
 
 export default ShelfSelector;

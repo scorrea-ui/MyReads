@@ -20,6 +20,7 @@ const Shelf = ({ title, books, updateBookShelf }) => {
 Shelf.propTypes = {
 	title: PropTypes.string.isRequired,
 	books: PropTypes.array.isRequired,
+	updateBookShelf: PropTypes.func.isRequired,
 };
 
 export default Shelf;

@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import * as BooksAPI from '../BooksAPI';
 import Book from '../components/Book';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Search = ({ allBooks, updateBookShelf }) => {
 	const [query, setQuery] = useState('');
 	const [books, setBooks] = useState([]);
 
 	const checkBookShelf = (books) => {
+		books.map((book) => {
+			book.shelf = !book.shelf ? 'none' : book.shelf;
+			return book;
+		});
+
 		books.map((book) => {
 			return allBooks.map((b) => {
 				if (book.id === b.id) {
@@ -16,9 +22,6 @@ const Search = ({ allBooks, updateBookShelf }) => {
 				return book;
 			});
 		});
-		return books.map(
-			(book) => (book.shelf = !book.shelf ? 'none' : book.shelf)
-		);
 	};
 
 	const updateQuery = async (e) => {
@@ -34,7 +37,7 @@ const Search = ({ allBooks, updateBookShelf }) => {
 	};
 
 	const updateBookShelves = async (book, shelf) => {
-		await BooksAPI.update(book, shelf);
+		await updateBookShelf(book, shelf);
 	};
 
 	return (
@@ -71,6 +74,11 @@ const Search = ({ allBooks, updateBookShelf }) => {
 			</div>
 		</div>
 	);
+};
+
+Search.propTypes = {
+	allBooks: PropTypes.array.isRequired,
+	updateBookShelf: PropTypes.func.isRequired,
 };
 
 export default Search;
